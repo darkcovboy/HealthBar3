@@ -10,7 +10,6 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Slider _slider;
 
     private float _recoveryRate = 0.2f;
-    private float _divider = 100;
 
     private void OnEnable()
     {
@@ -24,7 +23,7 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
-        _slider.value = _player.Health / _divider;
+        _slider.value = _player.GetHealth()/_player.GetMaxHealth();
     }
 
     private void OnHealthChanged()
@@ -35,9 +34,9 @@ public class HealthBar : MonoBehaviour
 
     private IEnumerator Fill()
     {
-        while (_slider.value != (_player.Health / _divider))
+        while (_slider.value != (_player.GetHealth() / _player.GetMaxHealth()))
         {
-            _slider.value = Mathf.MoveTowards(_slider.value, _player.Health / _divider, _recoveryRate * Time.deltaTime);
+            _slider.value = Mathf.MoveTowards(_slider.value, _player.GetHealth() / _player.GetMaxHealth(), _recoveryRate * Time.deltaTime);
             yield return null;
         }
     }

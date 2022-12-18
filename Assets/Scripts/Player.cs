@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] public float Health;
-    [SerializeField] public float MaxHealth;
+    [SerializeField] private float Health;
+    [SerializeField] private float MaxHealth;
 
     public event UnityAction HealthChanged;
     private float _healthChanging = 10;
@@ -27,5 +27,15 @@ public class Player : MonoBehaviour
             Health -= healthChanging;
             HealthChanged?.Invoke();
         }
+    }
+
+    public float GetHealth()
+    {
+        return Health;
+    }
+
+    public float GetMaxHealth()
+    {
+        return MaxHealth;
     }
 }
